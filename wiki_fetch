@@ -1,0 +1,21 @@
+#!/usr/bin/env python3
+
+import wikipedia
+from wikipedia import DisambiguationError
+
+searchcount = -1
+splitphrase = "wikipedia.exceptions.DisambiguationError: "
+
+search = input("Subject:     ")
+searchlist = wikipedia.search(search)
+
+for item in searchlist:
+    searchcount += 1
+    print(f"{searchcount}. {searchlist[searchcount]}")
+
+refine = input("Number:    ")
+print("Page summary:")
+try:
+    print(wikipedia.summary(searchlist[int(refine)], auto_suggest=False))
+except DisambiguationError:
+    print("DisambiguationError (I can't fix this - search for something else!)")
